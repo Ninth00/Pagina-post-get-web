@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+</head>
+<body>
+    <h1>Agregar Usuario</h1>
+    <form action="/agregarUsuario" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <h1>Lista de Usuarios</h1>
+    <a href="/obtenerUsuario"><button>Obtener Usuarios</button></a>
+
+    <form action="/borrarUsuario" method="POST">
+        <label >Ingresa el id:</label>
+        <input type="text" id="id" name="id" required><br><br>
+        <button type="submit">Borrar usuario</button>
+    </form>
+
+    <h1>Actualizar Nombre de Usuario</h1>
+    <form action="/actualizarUsuario" method="POST">
+        <label for="nom">Nombre Actual:</label>
+        <input type="text" id="nom" name="nom" required>
+        <br>
+        <label for="newnom">Nuevo Nombre:</label>
+        <input type="text" id="newnom" name="newnom" required>
+        <br>
+        <button type="submit">Actualizar</button>
+    </form>
+
+</body>
+</html>
