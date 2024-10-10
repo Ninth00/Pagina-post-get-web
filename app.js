@@ -43,7 +43,7 @@ app.get('/obtenerUsuario', (req, res) => {
         }
 
         let userHTML = '';
-        let i = 0;
+        let i = 1;
         respuesta.forEach(user => {
             userHTML += `<tr><td>${i}</td><td>${user.nombre}</td></tr>`;
             i++;
@@ -63,6 +63,37 @@ app.get('/obtenerUsuario', (req, res) => {
         </table>
         </body>
         </html>`);
+    });
+});
+
+app.post('/borrarUsuario', (req, res) => {
+    const id = req.body.id; // El ID del usuario a eliminar viene en el cuerpo de la solicitud
+    console.log("hola")
+    con.query('DELETE FROM usuario WHERE id_usuario = ?', [id], (err, resultado, fields) => {
+
+        if (err) {
+            console.error('Error al borrar el usuario:', err);
+            return res.status(500).send("Error al borrar el usuario");
+        }
+        if (resultado.affectedRows === 0) {
+            return res.status(404).send("Usuario no encontrado");
+        }
+        return res.send(`Usuario con ID ${id} borrado correctamente`);
+    });
+});
+
+app.post('/actualizarUsuario', (req, res) => {
+    const nom = req.body.nom;
+    const newnom = req.body.newnom;
+    con.query('UPDATE usuario SET nombre = ? WHERE nombre = ?', [newnom, nom], (err, resultado, fields) => {
+        if (err) {
+            console.error('Error al actualizar el usuario:', err);
+            return res.status(500).send("Error al actualizar el usuario");
+        }
+        if (resultado.affectedRows === 0) {
+            return res.status(404).send("Usuario no encontrado");
+        }
+        return res.send(`Usuario con nombre ${nom} actualizado correctamente`);
     });
 });
 
